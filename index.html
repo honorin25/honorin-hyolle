@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Honorin Hyolle — Conseil Patrimonial · Pontarlier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@200;300;400;500;600&family=DM+Mono:wght@300;400&display=swap"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#060709;color:#ede8dc;font-family:'Outfit',sans-serif;overflow-x:hidden;}
+:root{
+  --bg0:#060709;--bg1:#09090d;--bg2:#0d0e14;
+  --br:#1a1c26;--brG:#2e2508;
+  --txt:#ede8dc;--txtS:#b0a888;--txtD:#888060;
+  --g1:#c8a84b;--g2:#f0d878;--g3:#9a7020;
+  --grad:linear-gradient(135deg,#9a7020,#c8a84b,#f0d878,#c8a84b);
+  --fd:'Playfair Display',Georgia,serif;
+  --fs:'Outfit',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shimmer{0%{background-position:-400% center;}100%{background-position:400% center;}}
+@keyframes pulse{0%,100%{opacity:.9;transform:scale(1);}50%{opacity:.3;transform:scale(.75);}}
+@keyframes draw{from{stroke-dashoffset:150;}to{stroke-dashoffset:0;}}
+.fu{animation:fadeUp .6s ease both;}
+.fu1{animation:fadeUp .6s .1s ease both;}
+.fu2{animation:fadeUp .6s .2s ease both;}
+.fu3{animation:fadeUp .6s .32s ease both;}
+.fu4{animation:fadeUp .6s .44s ease both;}
+.gold{background:linear-gradient(135deg,#c8a84b 0%,#f0d878 45%,#c8a84b 55%,#9a7020 100%);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite;}
+.pulse{animation:pulse 2.2s ease-in-out infinite;}
+.hd{stroke-dasharray:150;animation:draw 1.8s ease forwards;}
+.hd2{stroke-dasharray:150;animation:draw 1.8s .3s ease both;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--brG),rgba(200,168,75,.25),var(--brG),transparent);}
+.label{color:var(--txtD);font-family:var(--fm);font-size:9px;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.section{padding:70px 20px;}
+.page{display:none;}
+.page.active{display:block;}
+.btn-g{background:var(--grad);border:none;color:#060709;font-family:var(--fs);font-weight:600;font-size:12px;letter-spacing:1px;padding:13px 26px;border-radius:2px;text-transform:uppercase;cursor:pointer;transition:opacity .2s;}
+.btn-g:hover{opacity:.85;}
+.btn-o{background:transparent;border:1px solid rgba(200,168,75,.5);color:var(--g1);font-family:var(--fs);font-weight:400;font-size:12px;padding:12px 20px;border-radius:2px;cursor:pointer;transition:all .2s;}
+.btn-o:hover{background:rgba(200,168,75,.06);}
+.btn-back{display:inline-flex;align-items:center;gap:8px;background:transparent;border:none;color:var(--txtS);font-family:var(--fs);font-size:13px;cursor:pointer;padding:0;margin-bottom:28px;}
+.btn-back:hover{color:var(--g1);}
+input,select{background:rgba(255,255,255,.03);border:1px solid var(--br);color:var(--txt);border-radius:6px;padding:14px 16px;font-size:14px;font-family:var(--fs);font-weight:300;width:100%;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--g1);background:rgba(200,168,75,.04);}
+input::placeholder{color:var(--txtD);}
+select{color:var(--txtD);}
+select.filled{color:var(--txt);}
+select option{background:#111319;color:var(--txt);}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(255,255,255,.02);border:1px solid var(--br);border-radius:4px;}
+.badge-check{color:var(--g1);font-size:10px;}
+.badge-txt{color:#9a9272;font-family:var(--fm);font-size:9px;letter-spacing:.8px;}
+.pill{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--br);border-radius:7px;color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.5;transition:border-color .2s;}
+.pill:hover{border-color:rgba(200,168,75,.3);}
+.pill-icon{font-size:20px;flex-shrink:0;}
+.step{background:var(--bg2);padding:30px 24px;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#060709;font-family:var(--fm);font-weight:600;font-size:13px;margin-bottom:16px;}
+.step-title{color:var(--txt);font-family:var(--fd);font-size:18px;font-weight:400;margin-bottom:8px;}
+.step-desc{color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.8;}
+#hdr{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(6,7,9,.97);border-bottom:1px solid var(--br);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0 20px;}
+.hdr-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.logo-name{color:var(--g1);font-family:var(--fd);font-size:14px;font-weight:500;line-height:1;}
+.logo-sub{color:var(--txtD);font-family:var(--fm);font-size:7px;letter-spacing:2px;text-transform:uppercase;margin-top:3px;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-link{background:transparent;border:none;color:var(--txtS);font-family:var(--fs);font-size:12px;font-weight:300;padding:7px 12px;cursor:pointer;border-radius:3px;transition:color .2s;white-space:nowrap;}
+.nav-link:hover,.nav-link.active{color:var(--g1);}
+#burger{display:none;flex-direction:column;gap:5px;background:transparent;border:none;cursor:pointer;padding:4px;}
+#burger span{display:block;width:22px;height:2px;background:var(--txtS);border-radius:2px;transition:all .25s;}
+#burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+#burger.open span:nth-child(2){opacity:0;}
+#burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;z-index:199;background:rgba(6,7,9,.98);border-bottom:1px solid var(--br);backdrop-filter:blur(20px);padding:16px 20px 20px;flex-direction:column;gap:4px;}
+#mobile-menu.open{display:flex;}
+.mnav{background:transparent;border:none;color:var(--txtS);font-family:var(--fs);font-size:15px;font-weight:300;padding:13px 0;cursor:pointer;text-align:left;border-bottom:1px solid var(--br);width:100%;}
+.mnav:last-of-type{border-bottom:none;}
+.mnav:hover,.mnav.active{color:var(--g1);}
+#success{display:none;position:fixed;inset:0;background:var(--bg0);z-index:500;align-items:center;justify-content:center;text-align:center;padding:28px;}
+#success.show{display:flex;}
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:300;background:#0d0e14;border-top:1px solid var(--brG);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;transform:translateY(100%);transition:transform .4s ease;}
+#cookie-banner.show{transform:translateY(0);}
+.ck-txt{color:var(--txtS);font-family:var(--fs);font-size:12px;font-weight:300;line-height:1.7;flex:1;min-width:200px;}
+.ck-btns{display:flex;gap:10px;flex-shrink:0;}
+.ck-ok{background:var(--grad);border:none;color:#060709;font-family:var(--fs);font-weight:600;font-size:11px;letter-spacing:1px;padding:10px 20px;border-radius:2px;text-transform:uppercase;cursor:pointer;}
+.ck-no{background:transparent;border:1px solid rgba(200,168,75,.4);color:var(--txtS);font-family:var(--fs);font-weight:400;font-size:11px;padding:10px 16px;border-radius:2px;cursor:pointer;}
+.ck-no:hover{border-color:var(--g1);color:var(--g1);}
+.site-footer{background:var(--bg1);border-top:1px solid var(--br);padding:28px 20px;}
+.footer-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-left{color:var(--txtD);font-family:var(--fs);font-size:11px;font-weight:300;line-height:1.7;}
+.footer-links{display:flex;gap:20px;align-items:center;}
+.footer-link{background:transparent;border:none;color:var(--txtD);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:color .2s;padding:0;}
+.footer-link:hover{color:var(--g1);}
+.ml-section{margin-bottom:38px;padding-bottom:38px;border-bottom:1px solid var(--br);}
+.ml-section:last-of-type{border-bottom:none;}
+.ml-section h2{color:var(--g1);font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.ml-section h3{color:var(--txt);font-family:var(--fs);font-size:13px;font-weight:500;margin-top:18px;margin-bottom:8px;}
+.ml-section p{color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.9;margin-bottom:10px;}
+.ml-section p:last-child{margin-bottom:0;}
+.ml-section strong{color:var(--txt);font-weight:500;}
+.ml-section a{color:var(--g1);text-decoration:none;}
+.ml-section a:hover{text-decoration:underline;}
+.ml-section ul{margin:10px 0;padding:0;list-style:none;}
+.ml-section ul li{color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.9;padding-left:16px;position:relative;}
+.ml-section ul li::before{content:"—";position:absolute;left:0;color:var(--g3);}
+.ml-credentials{background:rgba(200,168,75,.05);border:1px solid rgba(200,168,75,.15);border-radius:8px;padding:18px 20px;margin-top:14px;}
+.ml-credentials p{color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.9;margin-bottom:8px;}
+.ml-credentials p:last-child{margin-bottom:0;}
+@media(max-width:740px){
+  .nav-links{display:none!important;}
+  #burger{display:flex!important;}
+  .hero-grid{grid-template-columns:1fr!important;}
+  .hero-title{font-size:34px!important;}
+  .process-grid{grid-template-columns:1fr!important;}
+  .about-grid{grid-template-columns:1fr!important;}
+  .pourqui-grid{grid-template-columns:1fr!important;}
+  .deco-bg{display:none!important;}
+  .hdr-rdv{display:none!important;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- COOKIES -->
+<div id="cookie-banner">
+  <p class="ck-txt">&#x1F36A; Ce site utilise un cookie fonctionnel pour mémoriser votre choix de consentement. Aucun cookie publicitaire ou de tracking n'est utilisé. <button onclick="showPage('mentions');closeCookieBanner()" style="background:none;border:none;color:var(--g1);font-family:var(--fs);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;">En savoir plus</button></p>
+  <div class="ck-btns">
+    <button class="ck-ok" onclick="acceptCookies()">Accepter</button>
+    <button class="ck-no" onclick="refuseCookies()">Refuser</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="hdr-inner">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="showPage('home')">
+      <svg width="26" height="26" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#c8a84b" stroke-width=".8" opacity=".4"/>
+        <path class="hd" d="M12 8C16 12 24 12 28 16C32 20 32 20 28 24C24 28 16 28 12 32" stroke="#c8a84b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path class="hd2" d="M28 8C24 12 16 12 12 16C8 20 8 20 12 24C16 28 24 28 28 32" stroke="#f0d878" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".7"/>
+        <circle cx="20" cy="8" r="2" fill="#c8a84b"/>
+        <circle cx="20" cy="32" r="2" fill="#c8a84b"/>
+      </svg>
+      <div>
+        <div class="logo-name">Honorin Hyolle</div>
+        <div class="logo-sub">Apporteur d'affaires en gestion de patrimoine</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <nav class="nav-links">
+        <button class="nav-link active" id="nav-home" onclick="showPage('home')">◆ Accueil</button>
+        <button class="nav-link" id="nav-pourqui" onclick="showPage('pourqui')">Pour qui ?</button>
+        <button class="nav-link" id="nav-about" onclick="showPage('about')">À propos</button>
+        <button class="nav-link" id="nav-mentions" onclick="showPage('mentions')" style="font-size:10px;opacity:.7;">Mentions légales</button>
+      </nav>
+      <button class="btn-g hdr-rdv" onclick="showPage('home');setTimeout(scrollToForm,200)" style="padding:9px 16px;font-size:11px;">Prendre RDV</button>
+      <button id="burger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div id="mobile-menu">
+  <button class="mnav active" id="mnav-home" onclick="showPage('home');closeMenu()">◆ Accueil</button>
+  <button class="mnav" id="mnav-pourqui" onclick="showPage('pourqui');closeMenu()">◆ Pour qui ?</button>
+  <button class="mnav" id="mnav-about" onclick="showPage('about');closeMenu()">◆ À propos</button>
+  <button class="mnav" id="mnav-mentions" onclick="showPage('mentions');closeMenu()">◆ Mentions légales</button>
+  <button class="btn-g" onclick="showPage('home');closeMenu();setTimeout(scrollToForm,300)" style="margin-top:12px;width:100%;">Réserver mon RDV gratuitement</button>
+</div>
+
+<!-- PAGE ACCUEIL -->
+<div id="page-home" class="page active">
+  <section style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 20px 60px;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(26,28,38,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(26,28,38,.4) 1px,transparent 1px);background-size:64px 64px;opacity:.3;"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 62% 40%,rgba(154,112,32,.1),transparent 65%);"></div>
+    <div class="deco-bg" style="position:absolute;right:2%;top:10%;opacity:.04;pointer-events:none;">
+      <svg width="480" height="480" viewBox="0 0 40 40" fill="none">
+        <path d="M12 2C16 9 24 9 28 16C32 23 32 23 28 30C24 37 16 37 12 44" stroke="#c8a84b" stroke-width="1" fill="none"/>
+        <path d="M28 2C24 9 16 9 12 16C8 23 8 23 12 30C16 37 24 37 28 44" stroke="#f0d878" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+    <div class="wrap" style="position:relative;z-index:1;width:100%;">
+      <div class="hero-grid" style="display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:center;">
+        <div>
+          <div class="fu" style="display:inline-flex;align-items:center;gap:7px;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);border-radius:20px;padding:5px 14px;margin-bottom:26px;">
+            <div class="pulse" style="width:6px;height:6px;border-radius:50%;background:var(--g1);flex-shrink:0;"></div>
+            <span style="color:var(--g1);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;">DISPONIBLE · PONTARLIER &amp; RÉGION FRONTALIÈRE</span>
+          </div>
+          <h1 class="hero-title fu1" style="font-family:var(--fd);font-weight:400;font-size:50px;line-height:1.1;margin-bottom:20px;color:var(--txt);">
+            Et si l'on prenait<br>1h30<br><em class="gold">pour parler de votre avenir ?</em>
+          </h1>
+          <p class="fu2" style="color:var(--txtS);font-family:var(--fs);font-weight:300;font-size:15px;line-height:1.9;max-width:460px;margin-bottom:10px;">
+            Un rendez-vous de découverte d'<strong style="color:var(--txt);font-weight:500;">1h30</strong>.<br>
+            Laissez-nous vos coordonnées &mdash; on convient ensemble d'un rendez-vous.
+          </p>
+          <p class="fu2" style="color:var(--txtD);font-family:var(--fs);font-weight:300;font-size:13px;line-height:1.8;max-width:430px;margin-bottom:30px;font-style:italic;">
+            Frontalier, salarié, indépendant, dirigeant, proche de la retraite &mdash; chaque situation mérite une vraie écoute.
+          </p>
+          <div class="fu3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
+            <button class="btn-g" onclick="scrollToForm()">Réserver mon RDV gratuitement</button>
+            <button class="btn-o" onclick="showPage('pourqui')">Ce RDV est-il fait pour moi ?</button>
+          </div>
+          <div class="fu4" style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Apporteur d'affaires</span></div>
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Réseau Inovea</span></div>
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Certification AMF en cours</span></div>
+          </div>
+        </div>
+        <div class="fu2">
+          <div id="rdv-card" style="background:var(--bg2);border:1px solid var(--brG);border-radius:14px;padding:30px 26px;box-shadow:0 24px 64px rgba(0,0,0,.5);">
+            <h3 style="color:var(--txt);font-family:var(--fd);font-size:22px;font-weight:400;margin-bottom:6px;">Rendez-vous découverte</h3>
+            <p style="color:var(--g1);font-family:var(--fm);font-size:10px;letter-spacing:1px;margin-bottom:8px;">1h30 · GRATUIT · SANS ENGAGEMENT</p>
+            <p style="color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.7;margin-bottom:22px;">Laissez-nous vos coordonnées &mdash; on convient ensemble d'un rendez-vous.</p>
+            <div style="display:grid;gap:11px;">
+              <input type="text" id="f-nom" placeholder="Votre nom *"/>
+              <input type="text" id="f-prenom" placeholder="Votre prenom *"/>
+              <input type="tel" id="f-tel" placeholder="Votre telephone *"/>
+              <input type="email" id="f-email" placeholder="Votre adresse mail *"/>
+              <select id="f-moment" onchange="this.classList.add('filled')">
+                <option value="">Meilleur moment pour vous contacter</option>
+                <option>Matin (8h - 12h)</option>
+                <option>Après-midi (12h - 17h)</option>
+                <option>Fin de journée (17h - 19h)</option>
+                <option>Week-end</option>
+              </select>
+              <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:2px;">
+                <input type="checkbox" id="f-ok" style="width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--g1);cursor:pointer;"/>
+                <span style="color:var(--txtS);font-family:var(--fs);font-size:12px;font-weight:300;line-height:1.6;">J'accepte d'être contacté par Honorin Hyolle dans le cadre de ma demande de rendez-vous. Conformément au RGPD, vous pouvez exercer vos droits à l'adresse honorinhyolle&#64;gmail.com.</span>
+              </label>
+              <button class="btn-g" onclick="soumettre()" style="width:100%;margin-top:4px;">Je réserve mon RDV</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section" style="background:var(--bg1);">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:44px;">
+        <p class="label">Le processus</p>
+        <h2 style="color:var(--txt);font-family:var(--fd);font-size:32px;font-weight:400;font-style:italic;">Simple, rapide, sans pression.</h2>
+      </div>
+      <div class="process-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border-radius:10px;overflow:hidden;">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Formulaire de contact</div>
+          <div class="step-desc">Nom, prénom, téléphone et email. Pas de questionnaire interminable.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Prise de rendez-vous</div>
+          <div class="step-desc">Je vous rappelle pour convenir ensemble de la date et du format qui vous convient.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Discussion d'1h30</div>
+          <div class="step-desc">Rendez-vous en visio ou au cabinet.</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:14px 18px;background:rgba(200,168,75,.06);border:1px solid rgba(200,168,75,.15);border-radius:7px;text-align:center;">
+        <p style="color:var(--g1);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.7;">Un premier échange pour faire connaissance, comprendre votre situation et voir si notre façon de travailler vous correspond.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:36px 20px;text-align:center;">
+    <p style="color:var(--txtD);font-family:var(--fs);font-size:10px;font-style:italic;max-width:600px;margin:0 auto;line-height:1.7;">
+      Honorin Hyolle agit en qualité d'apporteur d'affaires au sein du réseau Inovea. Il ne fournit pas de conseil en investissement au sens réglementaire. Tout conseil personnalisé est délivré par des conseillers certifiés du réseau Inovea, dans le cadre d'une relation conforme à la réglementation AMF.
+    </p>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        © 2025 Honorin Hyolle — Apporteur d'affaires au sein du réseau Inovea<br>
+        Pontarlier (25300) — Doubs, France
+      </div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('mentions')">Mentions légales</button>
+        <span style="color:var(--br);">|</span>
+        <button class="footer-link" onclick="showPage('mentions')">Politique de confidentialité</button>
+        <span style="color:var(--br);">|</span>
+        <button class="footer-link" onclick="scrollToForm()">Contact</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- PAGE POUR QUI -->
+<div id="page-pourqui" class="page">
+  <section style="padding:90px 20px 80px;min-height:100vh;">
+    <div class="wrap">
+      <button class="btn-back" onclick="showPage('home')">&#8592; Retour</button>
+      <p class="label">Pour qui ?</p>
+      <h1 style="color:var(--txt);font-family:var(--fd);font-size:42px;font-weight:400;font-style:italic;line-height:1.15;margin-bottom:16px;">
+        Ce RDV est fait<br>pour vous si...
+      </h1>
+      <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.9;max-width:560px;margin-bottom:44px;">
+        Vous avez des questions sur votre épargne, votre retraite ou votre fiscalité ? Vous ne savez pas par où commencer ? Ce premier échange vous apportera plus de clarté dans vos interrogations.
+      </p>
+      <div class="pourqui-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:840px;margin-bottom:44px;">
+        <div class="pill"><span class="pill-icon">&#127464;&#127469;</span>Vous êtes frontalier et souhaitez optimiser votre situation patrimoniale entre la France et la Suisse</div>
+        <div class="pill"><span class="pill-icon">&#128176;</span>Vous avez de l'épargne qui dort et vous voulez la faire travailler</div>
+        <div class="pill"><span class="pill-icon">&#127970;</span>Vous êtes indépendant et souhaitez optimiser votre situation fiscale</div>
+        <div class="pill"><span class="pill-icon">&#8987;</span>Vous approchez la retraite et voulez préparer cette transition</div>
+        <div class="pill"><span class="pill-icon">&#128200;</span>Vous souhaitez générer un revenu complémentaire et ne savez pas par où commencer</div>
+        <div class="pill"><span class="pill-icon">&#10067;</span>Ce premier échange vous permettra d'obtenir rapidement des réponses claires à vos interrogations</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--brG);border-radius:12px;padding:26px 30px;max-width:520px;">
+        <p style="color:var(--g1);font-family:var(--fm);font-size:10px;letter-spacing:1.5px;margin-bottom:10px;">VOUS VOUS RECONNAISSEZ ?</p>
+        <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.8;margin-bottom:20px;">Réservez votre rendez-vous de découverte. C'est gratuit et sans engagement.</p>
+        <button class="btn-g" onclick="showPage('home');setTimeout(scrollToForm,200)">Réserver mon RDV gratuitement</button>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">© 2025 Honorin Hyolle — Pontarlier (25300)</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('mentions')">Mentions légales</button>
+        <span style="color:var(--br);">|</span>
+        <button class="footer-link" onclick="showPage('mentions')">Politique de confidentialité</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- PAGE A PROPOS -->
+<div id="page-about" class="page">
+  <section style="padding:90px 20px 80px;min-height:100vh;">
+    <div class="wrap">
+      <button class="btn-back" onclick="showPage('home')">&#8592; Retour</button>
+      <div class="about-grid" style="display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:start;max-width:760px;">
+        <div style="width:96px;height:96px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:42px;color:#060709;font-weight:500;flex-shrink:0;">H</div>
+        <div>
+          <p class="label">À propos</p>
+          <h1 style="color:var(--txt);font-family:var(--fd);font-size:38px;font-weight:400;margin-bottom:6px;">Honorin Hyolle</h1>
+          <p style="color:var(--g1);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;margin-bottom:26px;">APPORTEUR D'AFFAIRES EN GESTION DE PATRIMOINE · PONTARLIER</p>
+          <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.9;margin-bottom:16px;">
+            Basé à Pontarlier, au cœur de la zone frontalière franco-suisse, j'accompagne les personnes qui veulent gérer leur patrimoine avec plus d'aisance et de facilité.
+          </p>
+          <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.9;margin-bottom:16px;">
+            Je prépare actuellement la certification AMF (2026). J'exerce au sein du réseau Inovea &mdash; un réseau national de conseillers qui me permet de vous proposer une offre complète, en toute conformité réglementaire.
+          </p>
+          <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.9;margin-bottom:28px;">
+            Mon objectif est simple : que vous repartiez de notre échange avec une vision claire de votre situation et des pistes concrètes pour avancer.
+          </p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;">
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Réseau Inovea</span></div>
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Certification AMF en cours</span></div>
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Pontarlier</span></div>
+            <div class="badge"><span class="badge-check">&#10003;</span><span class="badge-txt">Zone frontalière France-Suisse</span></div>
+          </div>
+          <button class="btn-g" onclick="showPage('home');setTimeout(scrollToForm,200)">Prendre rendez-vous</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">© 2025 Honorin Hyolle — Pontarlier (25300)</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('mentions')">Mentions légales</button>
+        <span style="color:var(--br);">|</span>
+        <button class="footer-link" onclick="showPage('mentions')">Politique de confidentialité</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- PAGE MENTIONS LÉGALES -->
+<div id="page-mentions" class="page">
+  <section style="padding:90px 20px 80px;min-height:100vh;">
+    <div class="wrap" style="max-width:780px;">
+      <button class="btn-back" onclick="showPage('home')">&#8592; Retour à l'accueil</button>
+      <p class="label">Informations légales</p>
+      <h1 style="color:var(--txt);font-family:var(--fd);font-size:38px;font-weight:400;font-style:italic;margin-bottom:6px;">Mentions légales</h1>
+      <p style="color:var(--txtD);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;margin-bottom:10px;">DERNIÈRE MISE À JOUR : MARS 2025</p>
+      <p style="color:var(--txtS);font-family:var(--fs);font-size:12px;font-weight:300;line-height:1.7;margin-bottom:44px;font-style:italic;">En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), il est précisé aux utilisateurs du présent site l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.</p>
+
+      <div class="ml-section">
+        <h2>1. Présentation du site</h2>
+        <p><strong>Propriétaire et responsable de publication :</strong> Honorin Hyolle</p>
+        <p><strong>Adresse :</strong> Pontarlier (25300), Doubs, France</p>
+        <p><strong>Email :</strong> <a href="mailto:honorinhyolle@gmail.com">honorinhyolle&#64;gmail.com</a></p>
+        <p><strong>Délégué à la protection des données (DPD) :</strong> Honorin Hyolle — <a href="mailto:honorinhyolle@gmail.com">honorinhyolle&#64;gmail.com</a></p>
+        <p><strong>Téléphone :</strong> disponible sur demande à l'adresse email ci-dessus.</p>
+        <p><strong>Statut :</strong> Personne physique — apporteur d'affaires au sein du réseau Inovea. Non immatriculé au RCS à ce stade de l'activité. Non assujetti à la TVA (activité n'ayant pas atteint les seuils de franchise en base de droit commun).</p>
+        <div class="ml-credentials">
+          <p style="color:var(--g1);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;margin-bottom:12px;">QUALIFICATIONS ET FORMATIONS</p>
+          <p>Honorin Hyolle est titulaire des <strong>attestations de formation IAS niveau 1</strong> (Intermédiaire en Assurance) et <strong>IOBSP niveau 1</strong> (Intermédiaire en Opérations de Banque et Services de Paiement), obtenues en candidat libre.</p>
+          <p>Il est également titulaire du <strong>livret de formation CIF</strong> (Conseiller en Investissements Financiers). La <strong>certification AMF est en cours d'obtention</strong> (examen prévu en mai 2026).</p>
+          <p>Honorin Hyolle <strong>n'est pas immatriculé à l'ORIAS à titre personnel</strong> et n'exerce pas d'activité de conseil en investissements financiers au sens de l'article L.541-1 du Code monétaire et financier. Il agit exclusivement en qualité d'<strong>apporteur d'affaires au sein du réseau Inovea</strong>, dont les membres sont dûment habilités et immatriculés auprès des autorités compétentes.</p>
+        </div>
+      </div>
+
+      <div class="ml-section">
+        <h2>2. Hébergement</h2>
+        <p><strong>Hébergeur :</strong> GitHub, Inc.</p>
+        <p><strong>Service :</strong> GitHub Pages</p>
+        <p><strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
+        <p><strong>Site :</strong> <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a></p>
+        <p>L'hébergeur assure la continuité du service 24h/24, 7j/7, sous réserve d'interruptions pour maintenance ou cas de force majeure.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>3. Propriété intellectuelle</h2>
+        <p>Le site <strong>honorinhyolle.com</strong> constitue une œuvre de l'esprit protégée par les dispositions du Code de la Propriété Intellectuelle et des réglementations internationales applicables.</p>
+        <p>L'ensemble des contenus présents sur ce site (textes, design, logo double hélice, structure, mise en page) est la propriété exclusive d'Honorin Hyolle. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie de ces éléments, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable, sous peine de poursuites conformément aux articles L.335-2 et suivants du Code de la Propriété Intellectuelle.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>4. Description des services</h2>
+        <p>Ce site a pour objet de présenter l'activité d'Honorin Hyolle en qualité d'apporteur d'affaires et de permettre aux visiteurs de prendre contact en vue d'un rendez-vous de découverte patrimoniale.</p>
+        <p>Les informations présentées ont une vocation purement informative et <strong>ne constituent en aucun cas un conseil en investissement, un conseil juridique ou fiscal</strong> au sens réglementaire. Honorin Hyolle s'efforce de maintenir ces informations à jour mais ne saurait être tenu responsable d'omissions ou d'inexactitudes.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>5. Collecte des données personnelles</h2>
+        <p>Ce site collecte uniquement les données que vous saisissez volontairement dans le formulaire de prise de rendez-vous : nom, prénom, numéro de téléphone, adresse email, et créneau de contact préféré.</p>
+        <h3>Caractère obligatoire ou facultatif des données</h3>
+        <p>Les champs <strong>nom, prénom, téléphone et email sont obligatoires</strong> : sans ces informations, il est impossible de traiter votre demande de rendez-vous et de vous recontacter. Le champ « meilleur moment pour vous contacter » est <strong>facultatif</strong>.</p>
+        <h3>Finalité</h3>
+        <p>Ces données sont collectées dans l'unique but de vous recontacter afin de convenir d'un rendez-vous de découverte patrimoniale.</p>
+        <h3>Destinataire</h3>
+        <p>Honorin Hyolle, à titre personnel. Les données sont transmises via le service Formspree (voir article 9) et reçues à l'adresse honorinhyolle&#64;gmail.com. Aucune donnée n'est vendue ni cédée à des tiers à des fins commerciales.</p>
+        <h3>Base légale</h3>
+        <p>Consentement explicite de l'utilisateur (case à cocher dans le formulaire — article 6.1.a du RGPD).</p>
+        <h3>Durée de conservation</h3>
+        <p>Les données sont conservées pendant 12 mois maximum à compter de la demande de contact, puis supprimées.</p>
+        <h3>Données sensibles</h3>
+        <p>Aucune donnée sensible au sens de l'article 9 du RGPD n'est collectée sur ce site.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>6. Vos droits (RGPD)</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD — UE 2016/679) et à la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée, vous disposez des droits suivants :</p>
+        <ul>
+          <li>Droit d'accès à vos données personnelles (article 15 RGPD)</li>
+          <li>Droit de rectification (article 16 RGPD)</li>
+          <li>Droit à l'effacement / « droit à l'oubli » (article 17 RGPD)</li>
+          <li>Droit d'opposition au traitement (article 21 RGPD)</li>
+          <li>Droit à la limitation du traitement (article 18 RGPD)</li>
+          <li>Droit à la portabilité des données (article 20 RGPD)</li>
+          <li>Droit de retirer votre consentement à tout moment (article 13-2c RGPD)</li>
+        </ul>
+        <p style="margin-top:12px;">Pour exercer ces droits : <a href="mailto:honorinhyolle@gmail.com">honorinhyolle&#64;gmail.com</a> en précisant votre identité. Une copie d'une pièce d'identité pourra être demandée.</p>
+        <p>En cas de réclamation non résolue, vous pouvez saisir la <strong>CNIL</strong> : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
+      </div>
+
+      <div class="ml-section">
+        <h2>7. Non-communication des données personnelles</h2>
+        <p>Honorin Hyolle s'interdit de traiter, héberger ou transférer les données collectées vers un pays situé en dehors de l'Union Européenne ou non reconnu comme adéquat par la Commission européenne, sans en informer préalablement les utilisateurs concernés.</p>
+        <p>Exception faite du prestataire Formspree (États-Unis) mentionné à l'article 9, dont l'utilisation est portée à la connaissance de l'utilisateur au moment de la soumission du formulaire.</p>
+        <p>Aucune information personnelle n'est publiée à l'insu de l'utilisateur, échangée, transférée, cédée ou vendue à des tiers à des fins commerciales.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>8. Notification d'incident</h2>
+        <p>En cas de prise de connaissance d'une brèche de sécurité affectant des données personnelles, Honorin Hyolle s'engage à en informer les personnes concernées dans les meilleurs délais, conformément aux articles 33 et 34 du RGPD, et à prendre les mesures correctives appropriées.</p>
+        <p>Aucune méthode de transmission sur Internet ne pouvant garantir une sécurité absolue, les utilisateurs sont invités à ne pas communiquer de données sensibles via le formulaire de contact.</p>
+      </div>
+
+      <div class="ml-section">
+        <h2>9. Cookies et services tiers</h2>
+        <h3>Cookies</h3>
+        <p>Ce site utilise un unique cookie technique (<code style="color:var(--g1);font-size:12px;background:rgba(200,168,75,.08);padding:2px 6px;border-radius:3px;">cookie_choice</code>) strictement nécessaire au fonctionnement de la bannière de consentement. Ce cookie enregistre votre choix (accepter / refuser) afin de ne plus afficher la bannière à chaque visite. Il n'est pas utilisé à des fins publicitaires ou de tracking.</p>
+        <p><strong>Aucun cookie analytique, publicitaire ou de tracking tiers n'est déposé sur ce site.</strong></p>
+        <button onclick="resetCookieChoice()" class="btn-o" style="margin-top:10px;font-size:11px;">Réinitialiser mon choix de cookies</button>
+        <h3 style="margin-top:24px;">Service Formspree</h3>
+        <p>Le formulaire de contact utilise le service <strong>Formspree</strong> (Formspree, Inc., États-Unis) pour l'acheminement sécurisé des données vers l'adresse email du responsable du site. En soumettant le formulaire, vous acceptez que vos données transitent par ce service tiers, soumis à sa propre politique de confidentialité : <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a></p>
+      </div>
+
+      <div class="ml-section">
+        <h2>10. Droit applicable et juridiction</h2>
+        <p>Tout litige en relation avec l'utilisation du présent site est soumis au <strong>droit français</strong>. En dehors des cas où la loi ne le permet pas, compétence exclusive est attribuée aux <strong>tribunaux compétents de Pontarlier (25300)</strong>.</p>
+        <p>Les présentes mentions légales peuvent être modifiées à tout moment. L'utilisateur est invité à les consulter régulièrement.</p>
+      </div>
+
+      <div style="margin-top:40px;padding:20px 24px;background:rgba(200,168,75,.06);border:1px solid rgba(200,168,75,.15);border-radius:8px;">
+        <p style="color:var(--g1);font-family:var(--fm);font-size:9px;letter-spacing:1.5px;margin-bottom:8px;">UNE QUESTION SUR VOS DONNÉES ?</p>
+        <p style="color:var(--txtS);font-family:var(--fs);font-size:13px;font-weight:300;line-height:1.8;">Contactez le responsable de traitement : <a href="mailto:honorinhyolle@gmail.com" style="color:var(--g1);">honorinhyolle&#64;gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">© 2025 Honorin Hyolle — Pontarlier (25300)</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('home')">Accueil</button>
+        <span style="color:var(--br);">|</span>
+        <button class="footer-link" onclick="showPage('home');setTimeout(scrollToForm,200)">Contact</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- SUCCESS -->
+<div id="success">
+  <div style="max-width:440px;text-align:center;">
+    <svg width="54" height="54" viewBox="0 0 40 40" fill="none" style="margin-bottom:20px;">
+      <circle cx="20" cy="20" r="19" stroke="#c8a84b" stroke-width=".8" opacity=".4"/>
+      <path d="M12 8C16 12 24 12 28 16C32 20 32 20 28 24C24 28 16 28 12 32" stroke="#c8a84b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M28 8C24 12 16 12 12 16C8 20 8 20 12 24C16 28 24 28 28 32" stroke="#f0d878" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/>
+      <circle cx="20" cy="8" r="2" fill="#c8a84b"/>
+      <circle cx="20" cy="32" r="2" fill="#c8a84b"/>
+    </svg>
+    <h2 id="succ-titre" style="color:var(--txt);font-family:var(--fd);font-size:34px;font-weight:400;font-style:italic;margin-bottom:14px;">C'est noté !</h2>
+    <p style="color:var(--txtS);font-family:var(--fs);font-size:14px;font-weight:300;line-height:1.9;margin-bottom:22px;">On convient ensemble d'un rendez-vous de découverte. À très vite !</p>
+    <div style="background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);border-radius:8px;padding:14px 18px;margin-bottom:24px;">
+      <p style="color:var(--g1);font-family:var(--fs);font-size:13px;font-weight:300;">Question urgente ? <strong>honorinhyolle [at] gmail.com</strong></p>
+    </div>
+    <p id="succ-countdown" style="color:var(--txtD);font-family:var(--fm);font-size:11px;letter-spacing:1px;margin-bottom:10px;">RETOUR AUTOMATIQUE DANS <span id="succ-sec">30</span>s</p>
+    <div style="height:3px;background:var(--br);border-radius:2px;overflow:hidden;margin-bottom:20px;">
+      <div id="succ-bar" style="height:100%;width:100%;background:var(--grad);border-radius:2px;transition:width linear;"></div>
+    </div>
+    <button onclick="retourAccueil()" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(200,168,75,.4);color:var(--g1);font-family:var(--fs);font-size:13px;font-weight:400;padding:12px 22px;border-radius:3px;cursor:pointer;">
+      &#8592; Retour à l'accueil
+    </button>
+  </div>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(function(n){n.classList.remove('active');});
+  var el=document.getElementById('nav-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.mnav').forEach(function(m){m.classList.remove('active');});
+  var mel=document.getElementById('mnav-'+id); if(mel) mel.classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleMenu(){document.getElementById('burger').classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open');}
+function closeMenu(){document.getElementById('burger').classList.remove('open');document.getElementById('mobile-menu').classList.remove('open');}
+function scrollToForm(){var c=document.getElementById('rdv-card');if(c){c.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){document.getElementById('f-nom').focus();},600);}}
+function initCookies(){var ch=null;try{ch=localStorage.getItem('cookie_choice');}catch(e){}if(!ch){setTimeout(function(){document.getElementById('cookie-banner').classList.add('show');},1500);}}
+function acceptCookies(){try{localStorage.setItem('cookie_choice','accepted');}catch(e){}document.getElementById('cookie-banner').classList.remove('show');}
+function refuseCookies(){try{localStorage.setItem('cookie_choice','refused');}catch(e){}document.getElementById('cookie-banner').classList.remove('show');}
+function closeCookieBanner(){document.getElementById('cookie-banner').classList.remove('show');}
+function resetCookieChoice(){try{localStorage.removeItem('cookie_choice');}catch(e){}alert('Votre choix a été réinitialisé. La bannière réapparaîtra à votre prochaine visite.');}
+initCookies();
+function soumettre(){
+  var nom=document.getElementById('f-nom').value.trim();
+  var prenom=document.getElementById('f-prenom').value.trim();
+  var tel=document.getElementById('f-tel').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var moment=document.getElementById('f-moment').value;
+  var ok=document.getElementById('f-ok').checked;
+  if(!nom||!prenom||!tel||!email){alert('Merci de renseigner tous les champs obligatoires.');return;}
+  if(!ok){alert("Merci d'accepter d'être contacté pour finaliser votre demande.");return;}
+  var btn=document.querySelector('#rdv-card .btn-g');
+  if(btn){btn.textContent='Envoi en cours...';btn.disabled=true;}
+  fetch('https://formspree.io/f/xqeylany',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nom:nom,prenom:prenom,telephone:tel,email:email,moment:moment||'Non précisé',consentement:'Accepté',date:new Date().toLocaleString('fr-FR')})})
+  .then(function(r){
+    if(btn){btn.textContent='Je réserve mon RDV';btn.disabled=false;}
+    if(r.ok){document.getElementById('succ-titre').textContent="C'est noté, "+prenom+' !';document.getElementById('success').clas
